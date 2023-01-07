@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    tools {
+        
+        maven "maven3"
+    }
+
+    stages {
+        stage('get-code') {
+            steps {
+                git 'https://github.com/sriison/vanakkam-world.git'
+               
+            }
+
+           
+        }
+        
+        stage('build') {
+            steps {
+                sh 'mvn clean package'
+               
+            }
+
+           
+        }
+        
+        
+        stage('build-image') {
+            steps {
+                sh 'docker build -t tiru1 .'
+               
+            }
+            
+        }
+    }
+}
